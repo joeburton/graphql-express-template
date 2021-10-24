@@ -2,7 +2,6 @@ import express from "express";
 import { createServer } from "http";
 import { ApolloServer } from "apollo-server-express";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-// import cors from "cors";
 
 const developers = [
   {
@@ -69,8 +68,6 @@ const resolvers = [developersResolver, technologiesResolver];
 
 async function startApolloServer() {
   const app = express();
-
-  // app.use(cors());
 
   const httpServer = createServer(app);
 
