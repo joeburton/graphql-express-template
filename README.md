@@ -1,77 +1,105 @@
 ## Setting up and dependencies installation
 
 ```
-mkdir graphql-server-express
-cd graphql-server-express
+after cloning
+cd bff $npm install
+cd client $npm install
 ```
 
 ```
-npm init -y
-```
-
-```
-npm install express apollo-server-express
-npm install --save-dev @babel/core @babel/node @babel/preset-env babel-cli babel-preset-es2015 nodemon
+after cloning
+cd bff $npm start
+cd client $npm start
 ```
 
 Pretty straight-forward so far, right? Good.
 
-### Let's jump into the code
-
-Create a `.babelrc` file in the root folder
+### Let's jump into the express code
 
 ```
-{
-  "presets": ["@babel/preset-env"]
-}
-```
+// Mocked data us currently used for convenience
+const developers = [
+  {
+    name: "Joe Burton",
+    skills: "JavaScript, React, HTML, CSS",
+  },
+  {
+    name: "James Brown",
+    skills: "Java, MYSQL",
+  },
+  {
+    name: "Bill Smith",
+    skills: "PHP, MYSQL, HTML",
+  },
+];
 
-This file will enable us to use some ES6 capabilities such as the use of `import`.
+const technologies = [
+  { type: "JavaScript" },
+  { type: "React" },
+  { type: "HTML" },
+  { type: "CSS" },
+  { type: "Java" },
+  { type: "MYSQL" },
+  { type: "PHP" },
+];
 
-Create `src` folder and the `index.js` file in it as follows
+const typeDefDevelopers = `
+  extend type Query {
+    developers: [Developer]
+  }
 
-```
-import express from "express";
-import { ApolloServer, gql } from "apollo-server-express";
-
-const typeDefs = gql`
-  type Query {
-    hello: String
+  type Developer {
+    name: String
+    skills: String
   }
 `;
 
-const resolvers = {
-  Query: {
-    hello: () => "Hello world!",
-  },
+const typeDefTechnologies = `
+  extend type Query {
+    technologies: [Technologies]
+  }
+
+  type Technologies {
+    type: String
+  }
+`;
+
+const typeDef = `
+  type Query
+`;
+
+const typeDefs = [typeDef, typeDefDevelopers, typeDefTechnologies];
+
+// The resolvers
+const developersResolver = {
+  Query: { developers: () => developers },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const technologiesResolver = {
+  Query: { technologies: () => technologies },
+};
 
-const app = express();
-server.applyMiddleware({ app });
+const resolvers = [developersResolver, technologiesResolver];
 
-app.listen({ port: 4001 }, () =>
-  console.log(`Server listening on http://localhost:4001${server.graphqlPath}`)
-);
+async function startApolloServer() {
+  const app = express();
+
+  const httpServer = createServer(app);
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+  const server = new ApolloServer({
+    schema,
+  });
+
+  await server.start();
+
+  server.applyMiddleware({ app });
+
+  await new Promise((resolve) => httpServer.listen({ port: 5000 }, resolve));
+
+  console.log(`🚀 Server ready at http://localhost:5000${server.graphqlPath}`);
+
+  return { server, app };
+}
 ```
-
-A couple of things about this file:
-
-- This is the entry point of the server
-- I use one file for all the code just for simplicity - you can decide to split it into multiple files
-- I use the port `4001` but you can use another port if you want
-
-### How to start the server with `nodemon`
-
-Now update the `script` command in the `package.json` file as follows
-
-```
-...
-  "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
-  }
-...
-```
-
-Now run `npm start` in the terminal. The GraphQL Playground will be available at `http://localhost:4001/graphql` (or any other address/port you used).
