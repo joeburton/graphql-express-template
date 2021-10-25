@@ -2,19 +2,19 @@
 
 ```
 after cloning
-cd bff $npm install
-cd client $npm install
+cd /bff $npm install
+cd /client $npm install
 ```
 
 ```
 after cloning
-cd bff $npm start
-cd client $npm start
+cd /bff $npm start
+cd /client $npm start
 ```
 
 Pretty straight-forward so far, right? Good.
 
-### Let's jump into the express code
+Let's jump into the express code
 
 ```
 // Mocked data us currently used for convenience
