@@ -1,9 +1,10 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-import Technologies from "./Technologies";
+import Technologies from "./components/Technologies";
+import Developers from "./components/Developers";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4001/graphql",
+  uri: "http://localhost:5000/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -12,6 +13,7 @@ function App() {
     <div>
       <ApolloProvider client={client}>
         <Technologies />
+        <Developers />
       </ApolloProvider>
     </div>
   );

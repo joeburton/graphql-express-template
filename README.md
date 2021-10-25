@@ -14,10 +14,16 @@ cd /client $npm start
 
 Pretty straight-forward so far, right? Good.
 
-Let's jump into the express code
+Let's jump into the NodeJS/ Express code.
 
 ```
-// Mocked data us currently used for convenience
+
+import express from "express";
+import { createServer } from "http";
+import { ApolloServer } from "apollo-server-express";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+
+// Mocked data used currently for convenience.
 const developers = [
   {
     name: "Joe Burton",
