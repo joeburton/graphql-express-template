@@ -1,11 +1,15 @@
 import { technologies, developers } from "../data";
 
 const developersResolver = {
-  Query: { developers: () => developers },
+  Query: {
+    developers: () => developers,
+  },
 };
 
 const technologiesResolver = {
-  Query: { technologies: () => technologies },
+  Query: {
+    technologies: () => technologies,
+  },
 };
 
 export const resolvers = [developersResolver, technologiesResolver];
