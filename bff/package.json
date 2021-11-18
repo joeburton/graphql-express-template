@@ -5,6 +5,7 @@
   "scripts": {
     "server": "nodemon --exec babel-node src/index.js"
   },
+  "type": "module",
   "keywords": [
     "graphql",
     "apollo",

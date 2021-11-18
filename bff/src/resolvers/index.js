@@ -1,8 +1,11 @@
-import { technologies, developers } from "../data";
+import { technologies, developers } from "../data/index.js";
 
 const developersResolver = {
   Query: {
-    developers: () => developers,
+    developers: () => {
+      console.log(developers);
+      return developers;
+    },
   },
 };
 

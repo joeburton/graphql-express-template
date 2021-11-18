@@ -3,8 +3,8 @@ import { createServer } from "http";
 import { ApolloServer } from "apollo-server-express";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
-import { typeDefs } from "./typedefs";
-import { resolvers } from "./resolvers";
+import { typeDefs } from "./typedefs/index.js";
+import { resolvers } from "./resolvers/index.js";
 
 async function startApolloServer() {
   const app = express();
