@@ -1,4 +1,4 @@
-## Setting up and dependencies installation
+## Setting up
 
 ```
 after cloning
