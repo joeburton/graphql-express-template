@@ -8,8 +8,8 @@ cd /client $npm install
 
 ```
 after cloning
-cd /bff $npm start
-cd /client $npm start
+cd /bff $ npm start
+cd /client $ npm run server
 ```
 
 Pretty straight-forward so far, right? Good.
@@ -87,7 +87,7 @@ const technologiesResolver = {
 
 const resolvers = [developersResolver, technologiesResolver];
 
-async function startApolloServer() {
+async function startServer() {
   const app = express();
 
   const httpServer = createServer(app);
@@ -108,4 +108,6 @@ async function startApolloServer() {
 
   return { server, app };
 }
+
+startServer();
 ```

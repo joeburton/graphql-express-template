@@ -6,7 +6,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { typeDefs } from "./typedefs/index.js";
 import { resolvers } from "./resolvers/index.js";
 
-async function startApolloServer() {
+async function startServer() {
   const app = express();
 
   const httpServer = createServer(app);
@@ -32,4 +32,4 @@ async function startApolloServer() {
   return { server, app };
 }
 
-startApolloServer();
+startServer();
