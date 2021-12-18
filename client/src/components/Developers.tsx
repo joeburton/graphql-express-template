@@ -10,7 +10,7 @@ const GET_DEVELOPERS = gql`
 `;
 
 const DisplayDevelopers = () => {
-  const { loading, error, data } = useQuery(GET_DEVELOPERS, {});
+  const { loading, error, data } = useQuery(GET_DEVELOPERS);
 
   console.log("Developers: ", loading, error, data);
 

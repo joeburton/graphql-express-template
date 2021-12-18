@@ -9,7 +9,7 @@ const GET_TECHNOLOGIES = gql`
 `;
 
 const Technologies = () => {
-  const { loading, error, data } = useQuery(GET_TECHNOLOGIES, {});
+  const { loading, error, data } = useQuery(GET_TECHNOLOGIES);
 
   console.log("Technologies: ", loading, error, data);
 
