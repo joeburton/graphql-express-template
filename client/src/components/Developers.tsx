@@ -22,9 +22,9 @@ const DisplayDevelopers = () => {
     <>
       <h2>Developers</h2>
       <ul>
-        {/* {data.developers.map(({ name, skills }: any) => (
+        {data.developers.map(({ name, skills }: any) => (
           <li key={name}>{`${name}, ${skills}`}</li>
-        ))} */}
+        ))}
         <div className="active">
           <pre>{JSON.stringify(data.developers, null, 2)}</pre>
         </div>
