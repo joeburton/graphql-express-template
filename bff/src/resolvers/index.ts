@@ -1,4 +1,4 @@
-import { technologies, developers } from "../data/index.js";
+import { technologies, developers } from '../data';
 
 const developersResolver = {
   Query: {
